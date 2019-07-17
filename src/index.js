@@ -1,4 +1,3 @@
-// Start with hello world.
-function hello() {
-  Logger.log('Hello world.');
+function hello2() {
+  Logger.log('Hello world from subdirectory.');
 }
