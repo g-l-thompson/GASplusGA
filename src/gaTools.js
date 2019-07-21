@@ -12,9 +12,12 @@
 
 function gaTest () {
   // Insiders test
-  sheet = shGetOrInsertSheet("Insiders");
+  var sheet = shGetOrInsertSheet("Insiders");
   gaGetReportDataForProfile("198056905");
- 
+
+  // IT; 78159247
+  sheet = shGetOrInsertSheet("IT");
+  gaGetReportDataForProfile("78159247");
 }
 
 function gaGetReportDataForProfile(profileId) {
