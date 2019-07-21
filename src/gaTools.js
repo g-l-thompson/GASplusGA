@@ -24,13 +24,13 @@ function gaGetReportDataForProfile(profileId) {
   // The initial version has hardcodeds dates, metrics, and deminsions.
 
   var tableId = 'ga:' + profileId;
-  var startDate = '2019-06-01';
-  var endDate = '2019-06-30';
+  var startDate = '2019-07-12';
+  var endDate = '2019-07-19';
 
   var optArgs = {
     'dimensions': 'ga:browser',              // Comma separated list of dimensions.
     'metrics': 'ga:users,ga:sessions',
-    'sort': '-ga:users,-ga:sessions',       // Sort by users descending, then sessions descending
+    //'sort': '-ga:users,-ga:sessions',       // Sort by users descending, then sessions descending
     'start-index': '1',
     'max-results': '250'                     // Display the first 250 results.
   };
