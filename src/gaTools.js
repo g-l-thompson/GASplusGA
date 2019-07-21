@@ -28,7 +28,7 @@ function gaGetReportDataForProfile(profileId) {
   var endDate = '2019-07-19';
 
   var optArgs = {
-    'dimensions': 'ga:browser',              // Comma separated list of dimensions.
+    'dimensions': 'ga:browser,ga:browserVersion',              // Comma separated list of dimensions.
     'metrics': 'ga:users,ga:sessions',
     //'sort': '-ga:users,-ga:sessions',       // Sort by users descending, then sessions descending
     'start-index': '1',
