@@ -1,0 +1,16 @@
+{
+  "name": "google-analytics-in-apps-script",
+  "description": "Google Apps Script + GA Environment",
+  "version": "0.2.0",
+  "author": {
+    "name": "Gary Thompson",
+    "email": "glt@ucla.edu"
+  },
+  "main": "src/index.js",
+  "dependencies": {
+    "googleapis": "^41.0.0"
+  },
+  "devDependencies": {
+    "@types/google-apps-script": "0.0.54"
+  }
+}
