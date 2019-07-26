@@ -2,13 +2,13 @@
 // Documentation for APIS is here:
 //      https://developers.google.com/apps-script/reference/spreadsheet/
 
-function shSheetTests() {
+function shTester() {
     var aSheet = shGetOrInsertSheet("Sheet 1");
     aSheet.getRange(2,2,1,1).setValue("Hello");
     aSheet = shGetOrInsertSheet("Sheet 2");
     aSheet.getRange(3,3,1,1).setValue("Hello");
     aSheet = shGetOrInsertSheet("Sheet 3");
-    shOutputToSpreadsheet();
+    shOutputToSpreadsheet(aSheet);
 }
 
 // Tf the named sheet does not exist, this function creates it.
@@ -33,7 +33,7 @@ function shGetOrInsertSheet(sheetName) {
     }
 }
 
-function shOutputToSpreadsheet(results) {
+function shOutputToSpreadsheet(sheet, results) {
   
     var metrics = [];
     var headerNames = [];
@@ -51,7 +51,8 @@ function shOutputToSpreadsheet(results) {
         headers = results.columnHeaders;
     }
 
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    SpreadsheetApp.setActiveSpreadsheet(sheet);
+    sheet.clear();
 
     // Print the headers
     for (i=0; i<headers.length; i++) {

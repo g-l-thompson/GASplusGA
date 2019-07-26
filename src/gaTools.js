@@ -12,16 +12,16 @@
 
 function gaTest () {
   // Insiders test
-  var sheet = shGetOrInsertSheet("Insiders");
+  SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("Insiders"));
   gaGetReportDataForProfile("198056905");
 
-  // IT; 78159247
-  sheet = shGetOrInsertSheet("IT");
+  // IT web site test; 78159247
+  SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("IT"));
   gaGetReportDataForProfile("78159247");
 }
 
 function gaGetReportDataForProfile(profileId) {
-  // The initial version has hardcodeds dates, metrics, and deminsions.
+  // The initial version has hardcoded dates, metrics, and dimensions.
 
   var tableId = 'ga:' + profileId;
   var startDate = '2019-07-12';
@@ -30,13 +30,14 @@ function gaGetReportDataForProfile(profileId) {
   var optArgs = {
     'dimensions': 'ga:browser,ga:browserVersion',              // Comma separated list of dimensions.
     'metrics': 'ga:users,ga:sessions',
-    //'sort': '-ga:users,-ga:sessions',       // Sort by users descending, then sessions descending
+    // DO NOT INCLUDE A SORT SPECIFICATION.
+    // The accumulator assumes that resutls are sorted by dimensions.
     'start-index': '1',
     'max-results': '250'                     // Display the first 250 results.
   };
 
   // Make a request to the API.
-  // *** NEED A TRY-CATCH block here!
+  // *** NEED A TRY-CATCH block here
   var results = Analytics.Data.Ga.get(
       tableId,                    // Table id (format ga:xxxxxx).
       startDate,                  // Start-date (format yyyy-MM-dd).
@@ -45,11 +46,8 @@ function gaGetReportDataForProfile(profileId) {
       optArgs);
 
   if (results.getRows()) {
-    var anything = 1;
-    anything++;
     shOutputToSpreadsheet(results);
     return results;
-
   } else {
     throw new Error('No data returned from GA query.');
   }
