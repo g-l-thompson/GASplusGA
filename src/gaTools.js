@@ -64,7 +64,7 @@ function gaGetReportDataForProfile(profileId, sheet) {
 }
 
 function addResultsToAccumulator (results, accumulator) {
-  var dimensionCount = acDimensionCount(columnHeaders);
+  var dimensionCount = acDimensionCount(results.columnHeaders);
 
   // initialize a metrics count array for the appropriate number of metrics
   var initMetrics = [];

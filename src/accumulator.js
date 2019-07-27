@@ -108,7 +108,7 @@ function acPrepOutput (ac, dimCount, level, grid) {
     }
   }
 
-  function gaOutputToSheet (grid, sheetName) {
+function gaOutputToSheet (grid, sheetName) {
 
     shGetOrInsertSheet(sheetName);
     var sheet=SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
@@ -117,4 +117,4 @@ function acPrepOutput (ac, dimCount, level, grid) {
     sheet.getRange(2, 1,  grid.length, grid[0].length)
           .setValues(grid);
   
-  }
+}
