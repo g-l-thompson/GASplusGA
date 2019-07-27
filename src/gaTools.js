@@ -16,12 +16,12 @@ function gaTest () {
   // Insiders test
   var sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("Insiders"));
   var results = gaGetReportDataForProfile("198056905", sheet);
-  addResultsToAccumulator(results, accumulator);
+  gaAddResultsToAccumulator(results, accumulator);
 
   // IT web site test; 78159247
   sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("IT"));
   results = gaGetReportDataForProfile("78159247", sheet);
-  addResultsToAccumulator(results, accumulator);
+  gaAddResultsToAccumulator(results, accumulator);
 
   var grid = [];
   acPrepOutput (accumulator, acDimensionCount(results.columnHeaders), 0, grid);
