@@ -25,8 +25,7 @@ function gaTest () {
 
   var grid = [];
   acPrepOutput (accumulator, acDimensionCount(results.columnHeaders), 0, grid);
-  sheet = 
-  acOutputToSheet (grid)
+  acOutputToSheet (grid, "TOTALS");
 }
 
 function gaGetReportDataForProfile(profileId) {
