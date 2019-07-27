@@ -14,13 +14,13 @@ function gaTest () {
   var accumulator = [];
 
   // Insiders test
-  SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("Insiders"));
-  var results = gaGetReportDataForProfile("198056905");
+  var sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("Insiders"));
+  var results = gaGetReportDataForProfile("198056905", sheet);
   addResultsToAccumulator(results, accumulator);
 
   // IT web site test; 78159247
-  SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("IT"));
-  results = gaGetReportDataForProfile("78159247");
+  sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("IT"));
+  results = gaGetReportDataForProfile("78159247", sheet);
   addResultsToAccumulator(results, accumulator);
 
   var grid = [];
@@ -28,7 +28,7 @@ function gaTest () {
   acOutputToSheet (grid, "TOTALS");
 }
 
-function gaGetReportDataForProfile(profileId) {
+function gaGetReportDataForProfile(profileId, sheet) {
   // The initial version has hardcoded dates, metrics, and dimensions.
 
   var tableId = 'ga:' + profileId;
@@ -54,7 +54,7 @@ function gaGetReportDataForProfile(profileId) {
       optArgs);
 
   if (results.getRows()) {
-    shOutputToSpreadsheet(results);
+    shOutputToSpreadsheet(sheet, results);
     return results;
   } else {
     throw new Error('No data returned from GA query.');
