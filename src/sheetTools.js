@@ -65,3 +65,32 @@ function shOutputToSpreadsheet(sheet, results) {
     sheet.getRange(2, 1, metrics.length, headerNames.length)
         .setValues(metrics);
   }
+
+  function getAccounts() {
+    var accounts = Analytics.Management.Accounts.list();
+    if (accounts.getItems()) {
+      
+      //create a menu of the accounts
+      var ss = SpreadsheetApp.getActiveSpreadsheet();
+      var menuEntries = [];
+      var items = accounts.getItems();
+      for (var i=0; i<items.length; i++) {
+        var item = items[i];
+      //for (var item of items) {
+      //  while (accounts.getItems().next()) {
+          menuEntries.push ({name: item.getName(), functionName: "getProperties(" + item.getId() + ")"});
+        }
+      /*
+      var result = accounts.getItems().forEach(
+        function () {
+          return menuEntries.push ({name: getName(), functionName: getId()});
+          }
+        )
+      );
+      */
+      
+      ss.addMenu("Accounts", menuEntries);
+    } else {
+      return "";
+    }
+  }

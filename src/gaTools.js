@@ -86,3 +86,24 @@ function gaAddResultsToAccumulator (results, accumulator) {
   
   }
 }
+
+function gaGetWebProperties(accountId) {
+  var webProperties = Analytics.Management.Webproperties.list(accountId);
+  if (webProperties.getItems()) {
+    
+    //create a menu of the accounts
+    var sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("CONTROLLER"));
+    var webPropertyList = [];
+    var items = webProperties.getItems();
+    for (var i=0; i<items.length; i++) {
+      var item = items[i];
+      webPropertyList.push ({name: item.getName(), functionName: item.getId()});
+    }    
+    
+    // display list of properties on the sheet
+    shOutputToSpreadsheet(sheet, results);
+
+  } else {
+    return "";
+  }
+}
