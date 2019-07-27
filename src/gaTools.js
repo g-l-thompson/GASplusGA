@@ -60,24 +60,24 @@ function gaGetReportDataForProfile(profileId, sheet) {
     throw new Error('No data returned from GA query.');
   }
 
-  addResultsToAccumulator(results, accumulator);
+  gaAddResultsToAccumulator(results, accumulator);
 }
 
-function addResultsToAccumulator (results, accumulator) {
+function gaAddResultsToAccumulator (results, accumulator) {
   var dimensionCount = acDimensionCount(results.columnHeaders);
 
   // initialize a metrics count array for the appropriate number of metrics
   var initMetrics = [];
-  for (var jj=0; jj<results[0].length-dimensionCount; jj++){
+  for (var jj=0; jj<results.row[0].length-dimensionCount; jj++){
       initMetrics.push(0);
   }
 
   // this loop adds each row of results into the accumulator
-  for (var ii=0; ii<results.length; ii++) {
+  for (var ii=0; ii<results.rows.length; ii++) {
 
       // set the dimensions and metrics from this row of results
-      var dims = results[ii].slice(0, dimensionCount);
-      var metrics = results[ii].slice(dimensionCount);
+      var dims = results.rows[ii].slice(0, dimensionCount);
+      var metrics = results.rows[ii].slice(dimensionCount);
 
       // Process the first dimension (level 0), adding to the accumulator
       // NOTE: Sublevels will be processed recursively.
@@ -85,8 +85,4 @@ function addResultsToAccumulator (results, accumulator) {
       acProcessLevel (accumulator, firstLevel, dims, metrics, initMetrics);
   
   }
-  var grid = [];
-  acPrepOutput(accumulator, dimensionCount, 0, grid);
-  acOutputToSheet(grid);
-
 }
