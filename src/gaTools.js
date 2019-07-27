@@ -68,7 +68,7 @@ function gaAddResultsToAccumulator (results, accumulator) {
 
   // initialize a metrics count array for the appropriate number of metrics
   var initMetrics = [];
-  for (var jj=0; jj<results.row[0].length-dimensionCount; jj++){
+  for (var jj=0; jj<results.rows[0].length-dimensionCount; jj++){
       initMetrics.push(0);
   }
 
