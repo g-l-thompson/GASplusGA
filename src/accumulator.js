@@ -44,7 +44,7 @@ function acTester () {
     }
     var grid = [];
     acPrepOutput(accumulator, dimensionCount, 0, grid);
-    acOutputToSheet(grid, "TOTALS");
+    gaOutputToSheet(grid, "TOTALS");
 }
 
 function acProcessLevel (ac, level, dims, metrics, initMetrics) {
@@ -108,7 +108,7 @@ function acPrepOutput (ac, dimCount, level, grid) {
     }
   }
 
-  function acOutputToSheet (grid, sheetName) {
+  function gaOutputToSheet (grid, sheetName) {
 
     shGetOrInsertSheet(sheetName);
     var sheet=SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();

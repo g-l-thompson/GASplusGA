@@ -11,13 +11,22 @@
 // tracking id: UA-45095774-27
 
 function gaTest () {
+  var accumulator = [];
+
   // Insiders test
   SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("Insiders"));
-  gaGetReportDataForProfile("198056905");
+  var results = gaGetReportDataForProfile("198056905");
+  addResultsToAccumulator(results, accumulator);
 
   // IT web site test; 78159247
   SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("IT"));
-  gaGetReportDataForProfile("78159247");
+  results = gaGetReportDataForProfile("78159247");
+  addResultsToAccumulator(results, accumulator);
+
+  var grid = [];
+  acPrepOutput (accumulator, acDimensionCount(results.columnHeaders), 0, grid);
+  sheet = 
+  acOutputToSheet (grid)
 }
 
 function gaGetReportDataForProfile(profileId) {
@@ -51,4 +60,34 @@ function gaGetReportDataForProfile(profileId) {
   } else {
     throw new Error('No data returned from GA query.');
   }
+
+  addResultsToAccumulator(results, accumulator);
+}
+
+function addResultsToAccumulator (results, accumulator) {
+  var dimensionCount = acDimensionCount(columnHeaders);
+
+  // initialize a metrics count array for the appropriate number of metrics
+  var initMetrics = [];
+  for (var jj=0; jj<results[0].length-dimensionCount; jj++){
+      initMetrics.push(0);
+  }
+
+  // this loop adds each row of results into the accumulator
+  for (var ii=0; ii<results.length; ii++) {
+
+      // set the dimensions and metrics from this row of results
+      var dims = results[ii].slice(0, dimensionCount);
+      var metrics = results[ii].slice(dimensionCount);
+
+      // Process the first dimension (level 0), adding to the accumulator
+      // NOTE: Sublevels will be processed recursively.
+      const firstLevel = 0;
+      acProcessLevel (accumulator, firstLevel, dims, metrics, initMetrics);
+  
+  }
+  var grid = [];
+  acPrepOutput(accumulator, dimensionCount, 0, grid);
+  acOutputToSheet(grid);
+
 }
