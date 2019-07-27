@@ -88,15 +88,16 @@ function gaAddResultsToAccumulator (results, accumulator) {
 }
 
 function gaGetWebProperties(accountId) {
+  if (typeof accountId == 'undefined') account Id = '45095774';
   var webProperties = Analytics.Management.Webproperties.list(accountId);
   if (webProperties.getItems()) {
     
     //create a menu of the accounts
     var sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("CONTROLLER"));
     var webPropertyList = [];
-    var items = webProperties.getItems();
-    for (var i=0; i<items.length; i++) {
-      var item = items[i];
+    var webPropertyList = webProperties.getItems();
+    for (var i=0; i<webPropertyList.length; i++) {
+      var item = webPropertyList[i];
       webPropertyList.push ({name: item.getName(), functionName: item.getId()});
     }    
     

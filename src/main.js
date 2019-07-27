@@ -9,7 +9,9 @@ function onOpen() {
       var items = accounts.getItems();
       for (var i=0; i<items.length; i++) {
         var item = items[i];
-          menuEntries.push ({name: item.getName(), functionName: "getProperties(" + item.getId() + ")"});
+          menuEntries.push ({
+              name: item.getName(), 
+              functionName: "gaGetWebProperties(" + item.getId() + ")"});
         }
       ss.addMenu("Accounts", menuEntries);
     } else {
