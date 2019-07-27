@@ -88,21 +88,31 @@ function gaAddResultsToAccumulator (results, accumulator) {
 }
 
 function gaGetWebProperties(accountId) {
-  if (typeof accountId == 'undefined') account Id = '45095774';
+  if (typeof accountId == 'undefined') accountId = '45095774';
   var webProperties = Analytics.Management.Webproperties.list(accountId);
-  if (webProperties.getItems()) {
+  if (webProperties.totalResults > 0) {
     
-    //create a menu of the accounts
-    var sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("CONTROLLER"));
+    //create a list of the properties
     var webPropertyList = [];
-    var webPropertyList = webProperties.getItems();
-    for (var i=0; i<webPropertyList.length; i++) {
-      var item = webPropertyList[i];
-      webPropertyList.push ({name: item.getName(), functionName: item.getId()});
+    var properties = webProperties.items;
+    for (var i=0; i<properties.length; i++) {
+      var item = properties[i];
+      webPropertyList.push(new Array(item.name, item.defaultProfileId));
     }    
     
     // display list of properties on the sheet
-    shOutputToSpreadsheet(sheet, results);
+    var sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("CONTROLLER"));
+    //shOutputToSpreadsheet(sheet, webPropertyList);
+    var output = {
+      columnHeaders: new Array({name: "property count:"}, {name: webPropertyList.length}),
+      rows: webPropertyList
+    };
+
+    shOutputToSpreadsheet(sheet, output);
+    //sheet.getRange(1, 1, 1, 2).setValues(new Array("property count:",webPropertyList.length)):
+    //sheet.getRange(2, 1, webPropertyList.length, 2)
+    //
+    //   .setValues(webPropertyList);
 
   } else {
     return "";
