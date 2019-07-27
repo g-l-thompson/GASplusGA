@@ -44,7 +44,7 @@ function acTester () {
     }
     var grid = [];
     acPrepOutput(accumulator, dimensionCount, 0, grid);
-    acOutputToSheet(grid);
+    acOutputToSheet(grid, "TOTALS");
 }
 
 function acProcessLevel (ac, level, dims, metrics, initMetrics) {
@@ -108,9 +108,12 @@ function acPrepOutput (ac, dimCount, level, grid) {
     }
   }
 
-  function acOutputToSheet (grid) {
+  function acOutputToSheet (grid, sheetName) {
 
+    shGetOrInsertSheet(sheetName);
     var sheet=SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    
+    sheet.clear();
     sheet.getRange(2, 1,  grid.length, grid[0].length)
           .setValues(grid);
   
