@@ -42,7 +42,9 @@ function acTester () {
         acProcessLevel (accumulator, firstLevel, dims, metrics, initMetrics);
     
     }
-
+    var grid = [];
+    acPrepOutput(accumulator, dimensionCount, 0, grid);
+    acOutputToSheet(grid);
 }
 
 function acProcessLevel (ac, level, dims, metrics, initMetrics) {
@@ -62,7 +64,7 @@ function acProcessLevel (ac, level, dims, metrics, initMetrics) {
 
 function acAddMetrics (acc, dimIndex, metsCount, metrics) {
     for (var ii=0; ii<metsCount; ii++) {
-      acc[dimIndex].mets[ii] += metrics[ii];
+      acc[dimIndex].mets[ii] += parseInt(metrics[ii]);
     }
 }
   
@@ -105,4 +107,11 @@ function acPrepOutput (ac, dimCount, level, grid) {
       if (row.sub.length > 0) {acPrepOutput(row.sub, dimCount, level+1, grid);}
     }
   }
+
+  function acOutputToSheet (grid) {
+
+    var sheet=SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    sheet.getRange(2, 1,  grid.length, grid[0].length)
+          .setValues(grid);
   
+  }
