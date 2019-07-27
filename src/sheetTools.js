@@ -51,7 +51,6 @@ function shOutputToSpreadsheet(sheet, results) {
         headers = results.columnHeaders;
     }
 
-    SpreadsheetApp.setActiveSpreadsheet(sheet);
     sheet.clear();
 
     // Print the headers
