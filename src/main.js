@@ -31,7 +31,7 @@ function onOpen() {
 
     shClearAllSheets();
     for (var ii=0; ii<propertyList.length; ii++) {
-      if (propertyList[ii][2] == null) {
+      if (propertyList[ii][2] == "") {
         sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet(propertyList[ii][0]), clear);
         results = gaGetReportDataForProfile(propertyList[ii][1].toString(), sheet);
         gaAddResultsToAccumulator(results, accumulator);
