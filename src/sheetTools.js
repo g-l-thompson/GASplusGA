@@ -3,18 +3,19 @@
 //      https://developers.google.com/apps-script/reference/spreadsheet/
 
 function shTester() {
-    var aSheet = shGetOrInsertSheet("Sheet 1");
+    const clear = true;
+    var aSheet = shGetOrInsertSheet("Sheet 1", clear);
     aSheet.getRange(2,2,1,1).setValue("Hello");
-    aSheet = shGetOrInsertSheet("Sheet 2");
+    aSheet = shGetOrInsertSheet("Sheet 2", clear);
     aSheet.getRange(3,3,1,1).setValue("Hello");
-    aSheet = shGetOrInsertSheet("Sheet 3");
+    aSheet = shGetOrInsertSheet("Sheet 3", clear);
     shOutputToSpreadsheet(aSheet);
 }
 
 // Tf the named sheet does not exist, this function creates it.
 // If the named sheet does exist, it clears it of all values.
 // It returns the sheet object.
-function shGetOrInsertSheet(sheetName) {
+function shGetOrInsertSheet(sheetName, clear) {
     var targetSheet ='';
     try {
         targetSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(sheetName);
@@ -23,7 +24,7 @@ function shGetOrInsertSheet(sheetName) {
         }
         else {
             // sheet was found, so clear previous values
-            targetSheet.clear();
+            if (clear) {targetSheet.clear();}
         }
         return targetSheet;
     }
@@ -64,4 +65,24 @@ function shOutputToSpreadsheet(sheet, results) {
     // Print the rows of data.
     sheet.getRange(2, 1, metrics.length, headerNames.length)
         .setValues(metrics);
+  }
+
+  function shGetDataFromSheet(sheet, row, columns) {
+  
+    var dataRange = sheet.getRange(row, 1, sheet.getLastRow()+1-row, columns);
+    var results = dataRange.getValues();
+    return results;
+  }
+
+  function shClearAllSheets() {
+      var activeSS = SpreadsheetApp.getActiveSpreadsheet();
+      var sheets = activeSS.getSheets();
+      const noclear = false;
+      for (var ii=0; ii<sheets.length; ii++){
+          if (sheets[ii].getName() == 'CONTROLLER') {
+              shGetOrInsertSheet(sheets[ii].getName(), noclear);
+          } else {
+              activeSS.deleteSheet(sheets[ii]);
+          }
+      }
   }

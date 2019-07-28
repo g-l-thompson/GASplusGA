@@ -108,9 +108,10 @@ function acPrepOutput (ac, dimCount, level, grid) {
     }
   }
 
-function gaOutputToSheet (grid, sheetName) {
+function acOutputToSheet (grid, sheetName) {
 
-    shGetOrInsertSheet(sheetName);
+    const clear = true;
+    shGetOrInsertSheet(sheetName, clear);
     var sheet=SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
     
     sheet.clear();

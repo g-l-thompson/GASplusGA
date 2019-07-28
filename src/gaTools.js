@@ -11,15 +11,16 @@
 // tracking id: UA-45095774-27
 
 function gaTest () {
-  var accumulator = [];
+  
 
   // Insiders test
-  var sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("Insiders"));
+  const clear = true;
+  var sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("Insiders"), clear);
   var results = gaGetReportDataForProfile("198056905", sheet);
   gaAddResultsToAccumulator(results, accumulator);
 
   // IT web site test; 78159247
-  sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("IT"));
+  sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("IT"), clear);
   results = gaGetReportDataForProfile("78159247", sheet);
   gaAddResultsToAccumulator(results, accumulator);
 
@@ -101,7 +102,8 @@ function gaGetWebProperties(accountId) {
     }    
     
     // display list of properties on the sheet
-    var sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("CONTROLLER"));
+    const clear = true;
+    var sheet = shGetOrInsertSheet("CONTROLLER", clear);
     //shOutputToSpreadsheet(sheet, webPropertyList);
     var output = {
       columnHeaders: new Array({name: "property count:"}, {name: webPropertyList.length}),
@@ -109,10 +111,6 @@ function gaGetWebProperties(accountId) {
     };
 
     shOutputToSpreadsheet(sheet, output);
-    //sheet.getRange(1, 1, 1, 2).setValues(new Array("property count:",webPropertyList.length)):
-    //sheet.getRange(2, 1, webPropertyList.length, 2)
-    //
-    //   .setValues(webPropertyList);
 
   } else {
     return "";
