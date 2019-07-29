@@ -5,10 +5,6 @@
 // details on Analytics.Data.Ga.get() HTTP response code handling here:
 //   https://developers.google.com/analytics/devguides/reporting/core/v3/errors
 //
-// test account: 45095774
-// test profile: 198056905
-// table id: "ga:198056905"
-// tracking id: UA-45095774-27
 
 function gaTester () {
   
@@ -16,12 +12,12 @@ function gaTester () {
   // Insiders test
   const clear = true;
   var sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("Insiders"), clear);
-  var results = gaGetReportDataForProfile("198056905", sheet);
+  var results = gaGetReportDataForProfile("YOUR-PROFILE-ID-HERE", sheet);
   gaAddResultsToAccumulator(results, accumulator);
 
-  // IT web site test; 78159247
+  // IT web site test
   sheet = SpreadsheetApp.setActiveSheet(shGetOrInsertSheet("IT"), clear);
-  results = gaGetReportDataForProfile("78159247", sheet);
+  results = gaGetReportDataForProfile("YOUR-PROFILE-ID-HERE", sheet);
   gaAddResultsToAccumulator(results, accumulator);
 
   var grid = [];
