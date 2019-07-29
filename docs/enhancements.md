@@ -1,7 +1,7 @@
 ## Key Links
 * [documentation home (README)](../README.md)
-* [javascript code overview](docs/overview.md)
-* [running the script](docs/instructions.md)
+* [javascript code overview](overview.md)
+* [running the script](instructions.md)
 
 # Wish List
 The following list of enhancements would make this script easier to implement and more flexible.
