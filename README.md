@@ -4,6 +4,7 @@ Using Google Apps Script **(GAS)** to retrieve Google Analytics **(GA)** data.
 ## Key Links
 * [javascript code overview](docs/overview.md)
 * [running the script] (docs/instructions.md)
+* [wish list] (docs/enhancements.md)
 
 ## Context
 GA provides reports about website usage: the number of visitors, pageviews, browser, platform, and much more. Each report is linked to a property -- that is, a web site (or multple web sites) that are configured to share the same GA tracking code.
