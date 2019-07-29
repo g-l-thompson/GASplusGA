@@ -1,7 +1,7 @@
 ## Key Links
 * [documentation home (README)](../README.md)
-* [javascript code overview](docs/overview.md)
-* [wish list] (docs/enhancements.md)
+* [javascript code overview](overview.md)
+* [wish list](enhancements.md)
 
 # How to use this script
 This script runs in the context of a Google Drive spreadsheet. You need to take the following steps in order to execute this script:
