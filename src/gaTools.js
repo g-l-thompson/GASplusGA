@@ -10,7 +10,7 @@
 // table id: "ga:198056905"
 // tracking id: UA-45095774-27
 
-function gaTest () {
+function gaTester () {
   
 
   // Insiders test
