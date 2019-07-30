@@ -1,7 +1,7 @@
 ## Key Links
 * [documentation home (README)](../README.md)
-* [running the script] (docs/instructions.md)
-* [wish list] (docs/enhancements.md)
+* [running the script](docs/instructions.md)
+* [wish list](docs/enhancements.md)
 
 # An overview of the GASplusGA javascript files
 There are four javascript source files:
